@@ -22,8 +22,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".activities.MainActivity"
-            android:screenOrientation="portrait"
             android:launchMode="singleTask"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -50,7 +50,7 @@
             android:name=".stations.StationsDownloadService"
             android:exported="false" />
 
-        <service android:name=".tracking.BackgroundLocationService" />
+        <service android:name=".tracking.TrackingService" />
 
         <receiver
             android:name=".tracking.LocationReceiver"
@@ -61,6 +61,16 @@
             android:name=".tracking.ActivityReceiver"
             android:enabled="true"
             android:exported="true" />
+
+        <meta-data
+            android:name="AA_DB_NAME"
+            android:value="gocarinthia.db" />
+        <meta-data
+            android:name="AA_DB_VERSION"
+            android:value="1" />
+        <meta-data
+            android:name="AA_MODELS"
+            android:value="com.baneizalfe.gocarinthia.models.Station, com.baneizalfe.gocarinthia.models.Beacon" />
     </application>
 
 </manifest>

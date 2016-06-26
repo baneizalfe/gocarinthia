@@ -1,6 +1,9 @@
 package com.baneizalfe.gocarinthia.activities;
 
 import android.Manifest;
+import android.app.Activity;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -17,9 +20,9 @@ import android.widget.TextView;
 import com.baneizalfe.gocarinthia.App;
 import com.baneizalfe.gocarinthia.Const;
 import com.baneizalfe.gocarinthia.R;
-import com.baneizalfe.gocarinthia.stations.Station;
+import com.baneizalfe.gocarinthia.models.Station;
 import com.baneizalfe.gocarinthia.stations.StationsDownloadService;
-import com.baneizalfe.gocarinthia.tracking.BackgroundLocationService;
+import com.baneizalfe.gocarinthia.tracking.TrackingService;
 import com.google.android.gms.location.DetectedActivity;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
@@ -34,7 +37,8 @@ import butterknife.ButterKnife;
 
 public class HomeActivity extends BaseActivity {
 
-    static final String TAG = "HomeActivity";
+    private static final String TAG = "HomeActivity";
+    private static final int REQUEST_ENABLE_BT = 1;
 
     @BindView(R.id.user_action_image)
     ImageView user_action_image;
@@ -49,6 +53,8 @@ public class HomeActivity extends BaseActivity {
     private DetectedActivity detectedActivity;
     private Station nearestStation;
 
+    private BluetoothAdapter mBluetoothAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +62,12 @@ public class HomeActivity extends BaseActivity {
         ButterKnife.bind(this);
 
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        // Initializes a Bluetooth adapter.  For API level 18 and above, get a reference to
+        // BluetoothAdapter through BluetoothManager.
+        final BluetoothManager bluetoothManager =
+                (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
+        mBluetoothAdapter = bluetoothManager.getAdapter();
 
         LocalBroadcastManager.getInstance(this).registerReceiver(stationsReceiver, new IntentFilter(Const.ACTION.ACTION_STATIONS_DOWNLADED));
         LocalBroadcastManager.getInstance(this).registerReceiver(locationUpdateReceiver, new IntentFilter(Const.ACTION.LOCATION_ACQUIRED_ACTION));
@@ -98,7 +110,7 @@ public class HomeActivity extends BaseActivity {
                 }
                 showAlertDialog("Please enable following permissions:%s" + misssingList);
             }
-        }, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.BLUETOOTH, Manifest.permission.BLUETOOTH_ADMIN);
+        }, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
     }
 
@@ -106,10 +118,27 @@ public class HomeActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         updateActivityUI();
+
+        if (!mBluetoothAdapter.isEnabled()) {
+            if (!mBluetoothAdapter.isEnabled()) {
+                Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+            }
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // User chose not to enable Bluetooth.
+        if (requestCode == REQUEST_ENABLE_BT && resultCode == Activity.RESULT_CANCELED) {
+            finish();
+            return;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     private void onPermissionGranted() {
-        startService(new Intent(HomeActivity.this, BackgroundLocationService.class));
+        startService(new Intent(HomeActivity.this, TrackingService.class));
     }
 
     private final BroadcastReceiver stationsReceiver = new BroadcastReceiver() {

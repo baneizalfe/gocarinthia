@@ -6,7 +6,7 @@ import com.baneizalfe.gocarinthia.BuildConfig;
 import com.baneizalfe.gocarinthia.network.interceptors.ContentTypeInterceptor;
 import com.baneizalfe.gocarinthia.payment.PaymentRequest;
 import com.baneizalfe.gocarinthia.stations.StationsResponse;
-import com.baneizalfe.gocarinthia.user.AuthToken;
+import com.baneizalfe.gocarinthia.models.AuthToken;
 import com.baneizalfe.gocarinthia.user.LoginRequest;
 import com.baneizalfe.gocarinthia.user.RegisterRequest;
 import com.google.gson.Gson;

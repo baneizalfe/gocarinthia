@@ -23,4 +23,6 @@ public class Const {
     public interface NOTIFICATION_ID {
         public static int FOREGROUND_SERVICE = 101;
     }
+
+    public static final int MIN_DISTANCE = 100;
 }

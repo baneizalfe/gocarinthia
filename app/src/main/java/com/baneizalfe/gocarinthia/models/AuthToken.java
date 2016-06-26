@@ -1,4 +1,4 @@
-package com.baneizalfe.gocarinthia.user;
+package com.baneizalfe.gocarinthia.models;
 
 import com.google.gson.annotations.SerializedName;
 

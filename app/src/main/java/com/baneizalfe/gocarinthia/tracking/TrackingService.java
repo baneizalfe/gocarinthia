@@ -3,41 +3,56 @@ package com.baneizalfe.gocarinthia.tracking;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.LocalBroadcastManager;
+import android.util.Log;
 
 import com.baneizalfe.gocarinthia.Const;
 import com.baneizalfe.gocarinthia.R;
 import com.baneizalfe.gocarinthia.activities.MainActivity;
+import com.baneizalfe.gocarinthia.models.Beacon;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.ActivityRecognition;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
-public class BackgroundLocationService extends Service implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+import java.util.HashMap;
+
+public class TrackingService extends Service implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private static final String TAG = "Lokator";
 
-    private static BackgroundLocationService instance;
+    private static TrackingService instance;
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
     private PendingIntent locationIntent;
     private PendingIntent activityIntent;
     private boolean isLocationOn;
 
-    public BackgroundLocationService() {
+    private BluetoothManager mBluetoothManager;
+    private BluetoothAdapter mBluetoothAdapter;
+    private boolean btReady;
+    private Beacon currBeacon;
+    private HashMap<String, Beacon> beaconMap;
+
+    public TrackingService() {
     }
 
     public class LocalBinder extends Binder {
-        public BackgroundLocationService getServerInstance() {
-            return BackgroundLocationService.this;
+        public TrackingService getServerInstance() {
+            return TrackingService.this;
         }
     }
 
@@ -54,7 +69,7 @@ public class BackgroundLocationService extends Service implements GoogleApiClien
         instance = this;
     }
 
-    public static BackgroundLocationService getInstance() {
+    public static TrackingService getInstance() {
         return instance;
     }
 
@@ -85,6 +100,12 @@ public class BackgroundLocationService extends Service implements GoogleApiClien
             mGoogleApiClient.connect();
         }
 
+        btReady = initializeBT();
+        beaconMap = new HashMap<>();
+
+        // TODO: 6/26/16 Get list from server
+        Beacon fakeBeacon = new Beacon("Line 15", "EC:F2:FE:70:29:41", Beacon.TYPE_BUS);
+        beaconMap.put(fakeBeacon.identifier, fakeBeacon);
         return super.onStartCommand(intent, flags, startId);
     }
 
@@ -98,6 +119,8 @@ public class BackgroundLocationService extends Service implements GoogleApiClien
             if (mGoogleApiClient.isConnected()) mGoogleApiClient.disconnect();
 
         }
+
+        scanLeDevice(false);
 
         super.onDestroy();
     }
@@ -175,4 +198,60 @@ public class BackgroundLocationService extends Service implements GoogleApiClien
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
 
     }
+
+    final Handler mHandler = new Handler();
+    final int SCAN_PERIOD = 10000;
+    private boolean mScanning;
+
+    public boolean initializeBT() {
+        // For API level 18 and above, get a reference to BluetoothAdapter through
+        // BluetoothManager.
+        if (mBluetoothManager == null) {
+            mBluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
+            if (mBluetoothManager == null) {
+                Log.e(TAG, "Unable to initialize BluetoothManager.");
+                return false;
+            }
+        }
+
+        mBluetoothAdapter = mBluetoothManager.getAdapter();
+        if (mBluetoothAdapter == null) {
+            Log.e(TAG, "Unable to obtain a BluetoothAdapter.");
+            return false;
+        }
+
+        return true;
+    }
+
+    private void scanLeDevice(final boolean enable) {
+        if (enable) {
+            // Stops scanning after a pre-defined scan period.
+            mHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mScanning = false;
+                    mBluetoothAdapter.stopLeScan(mLeScanCallback);
+                }
+            }, SCAN_PERIOD);
+
+            mScanning = true;
+            mBluetoothAdapter.startLeScan(mLeScanCallback);
+        } else {
+            mScanning = false;
+            mBluetoothAdapter.stopLeScan(mLeScanCallback);
+        }
+    }
+
+    // Device scan callback.
+    private BluetoothAdapter.LeScanCallback mLeScanCallback = new BluetoothAdapter.LeScanCallback() {
+
+        @Override
+        public void onLeScan(final BluetoothDevice device, int rssi, byte[] scanRecord) {
+            if (device.getAddress() != null && beaconMap != null && beaconMap.containsKey(device.getAddress())) {
+                currBeacon = beaconMap.get(device.getAddress());
+                Log.e(TAG, "onLeScan: Found beacon " + currBeacon.identifier);
+            }
+        }
+    };
+
 }

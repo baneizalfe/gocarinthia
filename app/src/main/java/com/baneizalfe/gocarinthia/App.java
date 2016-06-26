@@ -6,8 +6,8 @@ import android.preference.PreferenceManager;
 import android.text.TextUtils;
 
 import com.activeandroid.ActiveAndroid;
-import com.baneizalfe.gocarinthia.stations.Station;
-import com.baneizalfe.gocarinthia.user.AuthToken;
+import com.baneizalfe.gocarinthia.models.Station;
+import com.baneizalfe.gocarinthia.models.AuthToken;
 import com.google.gson.Gson;
 import com.karumi.dexter.Dexter;
 

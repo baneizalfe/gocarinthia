@@ -4,13 +4,14 @@ import android.graphics.PointF;
 import android.location.Location;
 
 import com.baneizalfe.gocarinthia.App;
+import com.baneizalfe.gocarinthia.models.Station;
 
 /**
  * Created by baneizalfe on 6/25/16.
  */
 public class StationHelper {
 
-    public static Station getNearestStation(Location location) {
+    public static Station getNearestStation(Location location, int MIN_DISTANCE) {
 
         double minDistance = 6371000; // earth radius in meters, max distance possible
         Station bestStation = null;
@@ -20,7 +21,7 @@ public class StationHelper {
             for (Station station : App.getApp().getStationList()) {
                 double distance = station.distanceTo(location.getLongitude(), location.getLatitude());
 
-                if (distance < minDistance && distance < 100) {
+                if (distance < minDistance && distance < MIN_DISTANCE) {
                     bestStation = station;
                     bestStation.distance = distance;
                     minDistance = distance;
