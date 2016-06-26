@@ -74,7 +74,7 @@ public class HomeActivity extends BaseActivity {
         LocalBroadcastManager.getInstance(this).registerReceiver(locationUpdateReceiver, new IntentFilter(Const.ACTION.LOCATION_ACQUIRED_ACTION));
         LocalBroadcastManager.getInstance(this).registerReceiver(activityUpdateReceiver, new IntentFilter(Const.ACTION.ACTIVITY_ACQUIRED_ACTION));
 
-        if (App.getApp().getStationList() != null) {
+        if (App.getApp().getStationList() != null && App.getApp().getStationList().size() > 0) {
             checkPermission();
         } else {
             showProgressDialog(getString(R.string.updating_stops));
@@ -192,7 +192,7 @@ public class HomeActivity extends BaseActivity {
             statusLabel = "Moving";
             user_action_image.setImageResource(R.drawable.imagemoving);
         } else {
-            statusLabel = "Detecting";
+            statusLabel = "Detecting Activity";
             user_action_image.setImageResource(R.drawable.imageunknown);
         }
 
