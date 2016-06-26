@@ -24,7 +24,7 @@ public class ActivityReceiver extends BroadcastReceiver {
         if (result != null) {
             DetectedActivity activity = result.getMostProbableActivity();
             Log.d(TAG, "onReceive: " + activity.toString());
-            sendLocationUpdate(context, activity);
+            if (activity.getConfidence() > 75) sendLocationUpdate(context, activity);
         }
     }
 

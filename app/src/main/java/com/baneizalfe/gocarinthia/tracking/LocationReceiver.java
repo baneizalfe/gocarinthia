@@ -34,6 +34,7 @@ public class LocationReceiver extends BroadcastReceiver {
                     startBeaconSniffing();
                 }
 
+                sendLocationUpdate(context, location, nearestStation);
             }
         }
     }

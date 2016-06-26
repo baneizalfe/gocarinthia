@@ -20,7 +20,7 @@ public class StationHelper {
             for (Station station : App.getApp().getStationList()) {
                 double distance = station.distanceTo(location.getLongitude(), location.getLatitude());
 
-                if (distance < minDistance && distance < 72) {
+                if (distance < minDistance && distance < 100) {
                     bestStation = station;
                     bestStation.distance = distance;
                     minDistance = distance;

@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.content.LocalBroadcastManager;
+import android.text.Html;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -152,22 +153,22 @@ public class HomeActivity extends BaseActivity {
 
     private void updateActivityUI() {
 
+        String statusLabel;
         if (detectedActivity != null && (detectedActivity.getType() == DetectedActivity.ON_FOOT || detectedActivity.getType() == DetectedActivity.WALKING || detectedActivity.getType() == DetectedActivity.STILL)) {
-            if (nearestStation != null) {
-                current_status.setText(String.format("Near %s", nearestStation.station_name));
-            } else {
-                current_status.setText("Currently on foot");
-            }
-
+            statusLabel = "Currently on foot";
             user_action_image.setImageResource(R.drawable.imagestill);
 
         } else if (detectedActivity != null && (detectedActivity.getType() == DetectedActivity.IN_VEHICLE || detectedActivity.getType() == DetectedActivity.ON_BICYCLE)) {
-            current_status.setText("Moving");
+            statusLabel = "Moving";
             user_action_image.setImageResource(R.drawable.imagemoving);
         } else {
-            current_status.setText("Detecting");
+            statusLabel = "Detecting";
             user_action_image.setImageResource(R.drawable.imageunknown);
         }
 
+        if (nearestStation != null)
+            statusLabel += String.format("<br><small>Near %s</small>", nearestStation.station_name);
+
+        current_status.setText(Html.fromHtml(statusLabel));
     }
 }
