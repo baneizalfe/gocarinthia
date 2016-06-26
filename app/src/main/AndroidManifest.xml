@@ -22,8 +22,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".activities.MainActivity"
-            android:screenOrientation="portrait"
             android:launchMode="singleTask"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -49,18 +49,18 @@
         <service
             android:name=".stations.StationsDownloadService"
             android:exported="false" />
-
         <service android:name=".tracking.BackgroundLocationService" />
 
         <receiver
             android:name=".tracking.LocationReceiver"
             android:enabled="true"
             android:exported="true" />
-
         <receiver
             android:name=".tracking.ActivityReceiver"
             android:enabled="true"
             android:exported="true" />
+
+        <activity android:name=".activities.QrCode"></activity>
     </application>
 
 </manifest>

@@ -11,6 +11,7 @@ import android.preference.PreferenceManager;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.Html;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -150,6 +151,11 @@ public class HomeActivity extends BaseActivity {
 
         }
     };
+
+    public void startQRActivity(View view){
+        Intent myIntent = new Intent(this, QrCode.class);
+        this.startActivity(myIntent);
+    }
 
     private void updateActivityUI() {
 

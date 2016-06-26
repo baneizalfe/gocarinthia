@@ -101,7 +101,8 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="16dp"
-                        android:text="@string/eticket_action" />
+                        android:text="@string/eticket_action"
+                        android:onClick="startQRActivity" />
 
                 </RelativeLayout>
             </FrameLayout>
