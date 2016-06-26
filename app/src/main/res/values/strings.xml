@@ -30,4 +30,9 @@
     <string name="passenger_action">Add Passenger ></string>
     <string name="show_control">Show this screen to Controller</string>
     <string name="title_activity_qr_code">E-Ticket</string>
+
+    <string name="exit_title">Exit App</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="confirm_exit">Exit App?</string>
 </resources>

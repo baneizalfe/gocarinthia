@@ -207,4 +207,23 @@ public class HomeActivity extends BaseActivity {
         Intent myIntent = new Intent(this, QrCodeActivity.class);
         startActivity(myIntent);
     }
+
+    @OnClick(R.id.exit_title)
+    void exitApp() {
+
+        showConfirmDialog(getString(R.string.confirm_exit), getString(R.string.yes), getString(R.string.no), new ConfirmDialogListener() {
+            @Override
+            public void onConfirmed() {
+                stopService(new Intent(HomeActivity.this, TrackingService.class));
+                finish();
+            }
+
+            @Override
+            public void onDeclined() {
+
+            }
+        });
+
+
+    }
 }

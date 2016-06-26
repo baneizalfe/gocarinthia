@@ -173,6 +173,30 @@
                 </RelativeLayout>
             </FrameLayout>
 
+            <FrameLayout
+                android:id="@+id/home_exit_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:minHeight="?listPreferredItemHeight">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/exit_title"
+                        style="@style/HomeItemTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/exit_title" />
+
+                </RelativeLayout>
+            </FrameLayout>
         </LinearLayout>
 
     </ScrollView>
