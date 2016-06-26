@@ -27,7 +27,7 @@ public class QrCode extends BaseActivity {
         try {
             // generate a 150x150 QR code
             AuthToken t = App.getApp().getAuthToken();
-            String info = "uid:"+t.id+";bid:";//+App.getApp().getBeaconId();
+            String info = "uid:"+t.id+";bid:"+App.getApp().getBeaconId();
 
             BitMatrix bm = qrcw.encode(info, BarcodeFormat.QR_CODE, 150, 150);
             Bitmap bmp = Bitmap.createBitmap(150, 150, Bitmap.Config.RGB_565);

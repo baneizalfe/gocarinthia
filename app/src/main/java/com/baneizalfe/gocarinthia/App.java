@@ -44,6 +44,10 @@ public class App extends Application {
         preferences.edit().putString(Const.PREF_TOKEN, gson.toJson(authToken)).apply();
     }
 
+    public int getBeaconId(){
+        return 12345;
+    }
+
     public AuthToken getAuthToken() {
 
         if (authToken == null) {
