@@ -45,7 +45,7 @@ public class App extends Application {
         this.authToken = authToken;
         preferences.edit().putString(Const.PREF_TOKEN, gson.toJson(authToken)).apply();
     }
-
+    
     public AuthToken getAuthToken() {
 
         if (authToken == null) {
