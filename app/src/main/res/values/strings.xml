@@ -28,4 +28,6 @@
     <string name="bill_action">Consult ></string>
     <string name="passengers_title">Passenger</string>
     <string name="passenger_action">Add Passenger ></string>
+    <string name="show_control">Show this screen to Controller</string>
+    <string name="title_activity_qr_code">E-Ticket</string>
 </resources>

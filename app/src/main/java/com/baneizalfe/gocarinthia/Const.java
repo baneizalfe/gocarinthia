@@ -9,6 +9,7 @@ public class Const {
 
     public static final String PREF_WELCOME_SEEN = "pref_welcome";
     public static final String PREF_TOKEN = "pref_token";
+    public static final String PREF_BEACON = "pref_curr_beacon";
     public static final String PREF_PAYMENT_ADDED = "pref_payment_added";
     public static final String STATIONS_DOWNLOADED = "pref_stations_downloaded";
 
@@ -23,4 +24,6 @@ public class Const {
     public interface NOTIFICATION_ID {
         public static int FOREGROUND_SERVICE = 101;
     }
+
+    public static final int MIN_DISTANCE = 100;
 }

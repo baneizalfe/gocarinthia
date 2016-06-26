@@ -11,6 +11,7 @@ import android.util.Log;
 import com.activeandroid.ActiveAndroid;
 import com.baneizalfe.gocarinthia.App;
 import com.baneizalfe.gocarinthia.Const;
+import com.baneizalfe.gocarinthia.models.Station;
 import com.baneizalfe.gocarinthia.network.Api;
 
 import java.io.IOException;

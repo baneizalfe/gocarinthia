@@ -6,8 +6,9 @@ import android.preference.PreferenceManager;
 import android.text.TextUtils;
 
 import com.activeandroid.ActiveAndroid;
-import com.baneizalfe.gocarinthia.stations.Station;
-import com.baneizalfe.gocarinthia.user.AuthToken;
+import com.baneizalfe.gocarinthia.models.AuthToken;
+import com.baneizalfe.gocarinthia.models.Beacon;
+import com.baneizalfe.gocarinthia.models.Station;
 import com.google.gson.Gson;
 import com.karumi.dexter.Dexter;
 
@@ -24,6 +25,7 @@ public class App extends Application {
     private SharedPreferences preferences;
 
     private AuthToken authToken;
+    private Beacon beacon;
     private List<Station> stationList;
 
 
@@ -77,5 +79,13 @@ public class App extends Application {
 
     public boolean getPaymentSet() {
         return preferences.getBoolean(Const.PREF_PAYMENT_ADDED, false);
+    }
+
+    public Beacon getBeacon() {
+        return this.beacon;
+    }
+
+    public void setBeacon(Beacon beacon) {
+        this.beacon = beacon;
     }
 }

@@ -8,7 +8,7 @@ import com.baneizalfe.gocarinthia.fragments.PaymentFragment;
 import com.baneizalfe.gocarinthia.fragments.RegisterFragment;
 import com.baneizalfe.gocarinthia.network.Api;
 import com.baneizalfe.gocarinthia.payment.PaymentRequest;
-import com.baneizalfe.gocarinthia.user.AuthToken;
+import com.baneizalfe.gocarinthia.models.AuthToken;
 import com.baneizalfe.gocarinthia.user.RegisterRequest;
 
 import okhttp3.ResponseBody;

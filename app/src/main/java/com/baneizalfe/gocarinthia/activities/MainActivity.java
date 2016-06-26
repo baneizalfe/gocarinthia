@@ -10,8 +10,8 @@ import com.activeandroid.query.Select;
 import com.baneizalfe.gocarinthia.App;
 import com.baneizalfe.gocarinthia.Const;
 import com.baneizalfe.gocarinthia.R;
-import com.baneizalfe.gocarinthia.stations.Station;
-import com.baneizalfe.gocarinthia.user.AuthToken;
+import com.baneizalfe.gocarinthia.models.Station;
+import com.baneizalfe.gocarinthia.models.AuthToken;
 
 import java.util.List;
 

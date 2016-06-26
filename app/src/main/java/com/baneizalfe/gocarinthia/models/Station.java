@@ -1,4 +1,4 @@
-package com.baneizalfe.gocarinthia.stations;
+package com.baneizalfe.gocarinthia.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
+import com.baneizalfe.gocarinthia.stations.Haversine;
 
 /**
  * Created by baneizalfe on 6/25/16.

@@ -49,7 +49,7 @@
         <service
             android:name=".stations.StationsDownloadService"
             android:exported="false" />
-        <service android:name=".tracking.BackgroundLocationService" />
+        <service android:name=".tracking.TrackingService" />
 
         <receiver
             android:name=".tracking.LocationReceiver"
@@ -60,7 +60,21 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".activities.QrCode"></activity>
+        <activity
+            android:name=".activities.QrCodeActivity"
+            android:label="@string/title_activity_qr_code"
+            android:screenOrientation="portrait" />
+
+        <meta-data
+            android:name="AA_DB_NAME"
+            android:value="gocarinthia.db" />
+        <meta-data
+            android:name="AA_DB_VERSION"
+            android:value="1" />
+
+        <meta-data
+            android:name="AA_MODELS"
+            android:value="com.baneizalfe.gocarinthia.models.Beacon, com.baneizalfe.gocarinthia.models.Station" />
     </application>
 
 </manifest>

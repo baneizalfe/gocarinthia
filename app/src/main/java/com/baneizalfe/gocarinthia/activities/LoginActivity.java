@@ -5,12 +5,11 @@ import android.widget.EditText;
 
 import com.baneizalfe.gocarinthia.R;
 import com.baneizalfe.gocarinthia.network.Api;
-import com.baneizalfe.gocarinthia.user.AuthToken;
+import com.baneizalfe.gocarinthia.models.AuthToken;
 import com.baneizalfe.gocarinthia.user.LoginRequest;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
