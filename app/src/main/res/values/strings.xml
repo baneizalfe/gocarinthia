@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">Go Carinthia</string>
+    <string name="app_is_running">Go Carinthia is running. Click to open.</string>
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Password</string>
+    <string name="first_name_hint">Full Name</string>
+    <string name="year_of_birth_hint">Year of Birth</string>
+    <string name="register_text">Register</string>
+    <string name="login_text">Login</string>
+
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="common_error">An error occurred</string>
+    <string name="network_error">Network connection required.</string>
+    <string name="please_wait">Please wait.</string>
+
+    <string name="cc_holder_hint">Credit Card Holder</string>
+    <string name="cc_number_hint">Credit Card Number</string>
+    <string name="cc_cvc_hint">CVC</string>
+    <string name="cc_expiration_hint">Expiration Date</string>
+
+    <string name="updating_stops">Updating stops</string>
+    <string name="stops_updated">Stops updated</string>
+
+    <string name="eticket_title">Your E-Ticket</string>
+    <string name="eticket_action">Get QR Code ></string>
+    <string name="bill_title">Your Bill</string>
+    <string name="bill_action">Consult ></string>
+    <string name="passengers_title">Passenger</string>
+    <string name="passenger_action">Add Passenger ></string>
+</resources>

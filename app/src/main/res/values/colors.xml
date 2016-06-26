@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#2b9fd1</color>
+    <color name="colorPrimaryDark">#0078bc</color>
+    <color name="colorAccent">#46aad6</color>
+    <color name="textColorPrimary">#717273</color>
+
+    <color name="registerBackground">#e5f2f9</color>
+    <color name="welcomeBg">#27a9e1</color>
+
+    <color name="statusBg">#91cb74</color>
+    <color name="dividers">#cdced0</color>
+</resources>
