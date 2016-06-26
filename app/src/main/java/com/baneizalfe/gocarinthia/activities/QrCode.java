@@ -6,7 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
 
+import com.baneizalfe.gocarinthia.App;
 import com.baneizalfe.gocarinthia.R;
+import com.baneizalfe.gocarinthia.user.AuthToken;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
@@ -24,8 +26,10 @@ public class QrCode extends BaseActivity {
 
         try {
             // generate a 150x150 QR code
+            AuthToken t = App.getApp().getAuthToken();
+            String info = "uid:"+t.id+";bid:";//+App.getApp().getBeaconId();
 
-            BitMatrix bm = qrcw.encode("TEST", BarcodeFormat.QR_CODE, 150, 150);
+            BitMatrix bm = qrcw.encode(info, BarcodeFormat.QR_CODE, 150, 150);
             Bitmap bmp = Bitmap.createBitmap(150, 150, Bitmap.Config.RGB_565);
 
             for (int x = 0; x < 150; x++) {
